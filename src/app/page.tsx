@@ -1,69 +1,127 @@
-import Image from "next/image";
+import Link from "next/link";
+import { restaurant } from "@/data";
+import {
+  MapPin,
+  Phone,
+  Clock,
+  ChevronRight,
+  UtensilsCrossed,
+} from "lucide-react";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="flex-1">
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-end">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${restaurant.heroImage})`,
+            backgroundColor: "#2a2520",
+          }}
+          role="img"
+          aria-label={`${restaurant.name} restaurant`}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+
+        <div className="relative z-10 w-full px-5 pb-10 pt-20 sm:px-8 lg:px-16 max-w-5xl">
+          {/* Status Badge */}
+          <div className="mb-4">
+            {restaurant.isOpen ? (
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-green-400 bg-green-400/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-400/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Open Now
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-red-400 bg-red-400/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-red-400/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                Closed
+              </span>
+            )}
+          </div>
+
+          <p className="text-white/60 text-sm sm:text-base font-medium tracking-wide uppercase mb-2">
+            {restaurant.tagline}
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-4 leading-[1.1]">
+            {restaurant.name}
+          </h1>
+          <p className="text-white/70 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
+            {restaurant.description}
+          </p>
+
+          <Link
+            href="/menu"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-7 py-3.5 rounded-xl text-base transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <UtensilsCrossed size={18} />
+            View Menu
+            <ChevronRight size={18} />
+          </Link>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Info Section */}
+      <section className="px-5 sm:px-8 lg:px-16 py-12 max-w-5xl mx-auto">
+        <h2 className="text-lg font-bold mb-6">Visit Us</h2>
+        <div className="grid sm:grid-cols-3 gap-6">
+          {/* Location */}
+          <div className="flex gap-3 p-4 bg-surface rounded-xl border border-border">
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+              <MapPin size={20} />
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">
+                Location
+              </h3>
+              <p className="text-sm leading-relaxed">{restaurant.address}</p>
+            </div>
+          </div>
+
+          {/* Hours */}
+          <div className="flex gap-3 p-4 bg-surface rounded-xl border border-border">
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+              <Clock size={20} />
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">
+                Hours
+              </h3>
+              <p className="text-sm leading-relaxed">
+                {restaurant.openingHours}
+              </p>
+            </div>
+          </div>
+
+          {/* Phone */}
+          <div className="flex gap-3 p-4 bg-surface rounded-xl border border-border">
+            <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+              <Phone size={20} />
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">
+                Contact
+              </h3>
+              <a
+                href={`tel:${restaurant.phone}`}
+                className="text-sm leading-relaxed hover:text-accent transition-colors"
+              >
+                {restaurant.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-5 sm:px-8 lg:px-16 py-8 border-t border-border text-center">
+        <p className="text-xs text-muted">
+          &copy; {new Date().getFullYear()} {restaurant.name}. All rights
+          reserved.
+        </p>
+      </footer>
+    </main>
   );
 }
